@@ -14,8 +14,8 @@ import os
 
 # img_root_dir = r'D:\BaiduNetdiskDownload\vggface2\vggface2_test\vggface2_test\test'
 # save_path = r'D:\BaiduNetdiskDownload\vggface2\vggface2_test\vggface2_test\test1'
-img_root_dir = '/media/HDD1/wangtao/lunwen5_code/VGGFace/A_VGGFace/'
-save_path = '/media/HDD1/wangtao/lunwen5_code/VGGFace/A/'
+img_root_dir = '/kaggle/input/celeba-dataset/img_align_celeba/img_align_celeba'
+save_path = '/content/dataset/'
 
 
 
