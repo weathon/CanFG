@@ -36,8 +36,8 @@ test_transform = trans.Compose([
 embed_map = {}
 import tqdm
 
-for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
-    for name in tqdm.tqdm(files):
+# for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
+for name in tqdm.tqdm(os.listdir(img_root_dir):
         print(1)
         if name.endswith('jpg') or name.endswith('png'):
 
