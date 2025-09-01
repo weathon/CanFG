@@ -61,7 +61,7 @@ for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
                     face.save(os.path.join(save_path, new_path))
                 # embed_map[new_path] = embed.detach().cpu()
             except Exception as e:
-                print(name+'----------------------------------------')
+                print(e)
                 continue 
 
 # with open(embed_path, 'wb') as f:
