@@ -85,8 +85,8 @@ with torch.no_grad():
         filename2 = 'data/'+dataset+'/protected_AA/'+ names
         print(filename1)
 
-        vutils.save_image(img_1, filename1, nrow=1, normalize=True, range=(-1., 1.))
-        vutils.save_image(img_2, filename2, nrow=1, normalize=True, range=(-1., 1.))
+        vutils.save_image(img_1, filename1, nrow=1, normalize=True, value_range=(-1., 1.))
+        vutils.save_image(img_2, filename2, nrow=1, normalize=True, value_range=(-1., 1.))
 
 
 
