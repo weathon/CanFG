@@ -1,5 +1,5 @@
 import torch
-from mtcnn import MTCNN
+from torch_mtcnn import detect_faces
 import cv2
 import numpy as np
 
@@ -23,11 +23,7 @@ save_path = '/content/dataset/'
 
 device = torch.device('cuda:0')
 # device = torch.device('cpu')
-mtcnn = MTCNN()
 
-model = Backbone(50, 0.6, 'ir_se').to(device)
-model.eval()
-model.load_state_dict(torch.load('model_ir_se50.pth'))
 
 # threshold = 1.54
 test_transform = trans.Compose([
@@ -48,7 +44,7 @@ for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
                 p = os.path.join(root, name)
                 img = cv2.imread(p)
                 # if img.shape[0]>256 and img.shape[1]
-                faces = mtcnn.detect_faces(img[:, :, ::-1].astype('float32'), min_face_size=64, crop_size=(128, 128))
+                faces = detect_faces(img[:, :, ::-1].astype('float32'), min_face_size=64, crop_size=(128, 128))
                 if len(faces) == 0:
                     print("skip")
                     continue
