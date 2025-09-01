@@ -42,7 +42,7 @@ for name in tqdm.tqdm(os.listdir(img_root_dir)):
         if name.endswith('jpg') or name.endswith('png'):
 
             try:
-                p = os.path.join(root, name)
+                p = os.path.join(img_root_dir, name)
                 print(2)
                 img = cv2.imread(p)
                 print(3)
