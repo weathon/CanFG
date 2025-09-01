@@ -13,36 +13,31 @@ import os
 
 os.environ['CUDA_VISIBLE_DEVICES'] ='0'
 
-
 def parse(args=None):
     parser = argparse.ArgumentParser()
+    # parser.add_argument('--data_path', default='/data_disk/wangtao/mymodel/data/img_align_celeba/', type=str)
+    parser.add_argument('--data_path', default='/media/HDD1/wangtao/datatset/img_align_celeba/img_128_align/', type=str)
 
-    parser.add_argument('--img_size', dest='img_size', type=int, default=128)
-    parser.add_argument('--lambda_rec', type=float, default=10)
+    parser.add_argument('--lambda_rec', type=float, default=100)
     parser.add_argument('--lambda_gp',  type=float, default=10.0)
-    parser.add_argument('--lambda_id', type=float, default=1)
-    parser.add_argument('--lambda_em', type=float, default=10)
-    parser.add_argument('--lambda_lp', type=float, default=1)
+    parser.add_argument('--lambda_id', type=float, default=0)
+    parser.add_argument('--lambda_em', type=float, default=500)
+    parser.add_argument('--lambda_lp', type=float, default=10)
 
     parser.add_argument('--mode', dest='mode', default='wgan', choices=['wgan', 'lsgan', 'dcgan'])
-    parser.add_argument('--epochs', dest='epochs', type=int, default=140, help='# of epochs')
+    parser.add_argument('--epochs', dest='epochs', type=int, default=125, help='# of epochs')
     parser.add_argument('--batch_size', dest='batch_size', type=int, default=64)# todo
-    parser.add_argument('--num_workers', dest='num_workers', type=int, default=0)
-    parser.add_argument('--lr', dest='lr', type=float, default=0.0001, help='learning rate')
+    parser.add_argument('--lr', dest='lr', type=float, default=0.0002, help='learning rate')
     parser.add_argument('--beta1', dest='beta1', type=float, default=0.5)
     parser.add_argument('--beta2', dest='beta2', type=float, default=0.999)
     parser.add_argument('--n_d', dest='n_d', type=int, default=4, help='# of d updates per g update')
 
     parser.add_argument('--b_distribution', dest='b_distribution', default='none',
                         choices=['none', 'uniform', 'truncated_normal'])
-    parser.add_argument('--n_samples', dest='n_samples', type=int, default=1 , help='# of sample images')
+    parser.add_argument('--n_samples', dest='n_samples', type=int, default=32 , help='# of sample images')
 
-    parser.add_argument('--save_interval', dest='save_interval', type=int, default=1000)
-    parser.add_argument('--sample_interval', dest='sample_interval', type=int, default=1000)
     parser.add_argument('--gpu', dest='gpu', action='store_true',default=True)
-    parser.add_argument('--multi_gpu', dest='multi_gpu', action='store_true')
-    parser.add_argument('--experiment_name', dest='experiment_name',
-                        default=datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"))
+
     return parser.parse_args(args)
 
 args = parse()
