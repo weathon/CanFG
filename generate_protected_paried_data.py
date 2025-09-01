@@ -53,7 +53,7 @@ args.betas = (args.beta1, args.beta2)
 dataset='CelebA'
 #配对的数据（包括相同身份和不同身份）#
 
-valid_dataset = CelebA_test('/kaggle/input/celeba-dataset','/kaggle/input/celeba-dataset')
+valid_dataset = CelebA_test('/kaggle/input/celeba-dataset/img_align_celeba','/kaggle/input/celeba-dataset/img_align_celeba')
 valid_dataloader = data.DataLoader(
     valid_dataset, batch_size=args.n_samples, num_workers=args.num_workers,
     shuffle=False, drop_last=False
