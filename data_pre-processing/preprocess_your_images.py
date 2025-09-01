@@ -50,6 +50,7 @@ for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
                 # if img.shape[0]>256 and img.shape[1]
                 faces = mtcnn.align_multi(Image.fromarray(img[:, :, ::-1]), min_face_size=64, crop_size=(128, 128))
                 if len(faces) == 0:
+                    print("skip")
                     continue
                 for face in faces:
                     # scaled_img = face.resize((112, 112), Image.ANTIALIAS)
@@ -61,7 +62,7 @@ for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
                 # embed_map[new_path] = embed.detach().cpu()
             except Exception as e:
                 print(name+'----------------------------------------')
-                continue
+                continue 
 
 # with open(embed_path, 'wb') as f:
 #     pickle.dump(embed_map, f)
