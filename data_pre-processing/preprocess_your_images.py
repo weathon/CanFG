@@ -42,7 +42,8 @@ for name in tqdm.tqdm(os.listdir(img_root_dir)):
                 p = os.path.join(img_root_dir, name)
                 img = cv2.imread(p)
                 # if img.shape[0]>256 and img.shape[1]
-                faces = detect_faces(Image.open(p), min_face_size=64).resize((128, 128))
+                bounding_boxes, landmarks = detect_faces(Image.open(p), min_face_size=64)
+                print(bounding_boxes)
                 if len(faces) == 0:
                     print("skip")
                     continue
