@@ -47,7 +47,7 @@ for root, dirs, files in os.walk(img_root_dir):
                 p = os.path.join(root, name)
                 img = cv2.imread(p)
                 # if img.shape[0]>256 and img.shape[1]
-                faces = mtcnn.align_multi(Image.fromarray(img[:, :, ::-1]), min_face_size=64, crop_size=(128, 128))
+                faces = mtcnn.detect_faces(Image.fromarray(img[:, :, ::-1]), min_face_size=64, crop_size=(128, 128))
                 if len(faces) == 0:
                     continue
                 for face in faces:
