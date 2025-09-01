@@ -38,8 +38,9 @@ test_transform = trans.Compose([
 # decoder = libnvjpeg.py_NVJpegDecoder()
 
 embed_map = {}
+import tqdm
 
-for root, dirs, files in os.walk(img_root_dir):
+for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir):
     for name in files:
         if name.endswith('jpg') or name.endswith('png'):
 
