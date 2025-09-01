@@ -1,18 +1,3 @@
-
-import argparse
-import datetime
-from test_data import CelebA_test
-import torch.utils.data as data
-
-import torch
-import torchvision.utils as vutils
-#todo
-from CanFG import CanFG
-
-import os
-
-os.environ['CUDA_VISIBLE_DEVICES'] ='0'
-
 def parse(args=None):
     parser = argparse.ArgumentParser()
     # parser.add_argument('--data_path', default='/data_disk/wangtao/mymodel/data/img_align_celeba/', type=str)
@@ -37,51 +22,3 @@ def parse(args=None):
     parser.add_argument('--n_samples', dest='n_samples', type=int, default=32 , help='# of sample images')
 
     parser.add_argument('--gpu', dest='gpu', action='store_true',default=True)
-
-    return parser.parse_args(args)
-
-args = parse()
-print(args)
-
-args.lr_base = args.lr
-args.betas = (args.beta1, args.beta2)
-dataset='CelebA'
-#配对的数据（包括相同身份和不同身份）#
-
-valid_dataset = CelebA_test('/media/HDD1/wangtao/lunwen5_new/data/'+dataset+'/A_/','/media/HDD1/wangtao/lunwen5_new/data/'+dataset+'/AA_/')
-valid_dataloader = data.DataLoader(
-    valid_dataset, batch_size=args.n_samples, num_workers=args.num_workers,
-    shuffle=False, drop_last=False
-)
-
-CanFG = CanFG(args)
-CanFG.load('premodels/seed85_anonymized_100_id_0_em_500_lp_10.pt')
-
-
-
-
-if not os.path.exists('data/'+dataset+'/protected_A/'):
-    os.makedirs('data/'+dataset+'/protected_A/')
-if not os.path.exists('data/'+dataset+'/protected_AA/'):
-    os.makedirs('data/'+dataset+'/protected_AA/')
-
-torch.save(CanFG.EM.state_dict(), 'premodels/irse50_seed85_anonymized_100_id_0_em_500_lp_10_EM.pt')
-CanFG.eval()
-with torch.no_grad():
-    iter=0
-    for img_1,img_2,name in valid_dataloader:
-        img_1 = img_1.cuda() if args.gpu else img_1
-        img_2 = img_2.cuda() if args.gpu else img_2
-        img_1=CanFG.G(img_1)
-        img_2 = CanFG.G(img_2)
-        names=name[0][0:-3]+'png'
-        # names=name[0]
-        filename1='data/'+dataset+'/protected_A/'+names
-        filename2 = 'data/'+dataset+'/protected_AA/'+ names
-        print(filename1)
-
-        vutils.save_image(img_1, filename1, nrow=1, normalize=True, range=(-1., 1.))
-        vutils.save_image(img_2, filename2, nrow=1, normalize=True, range=(-1., 1.))
-
-
-
