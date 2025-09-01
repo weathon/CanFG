@@ -59,10 +59,10 @@ valid_dataloader = data.DataLoader(
 )
 
 CanFG = CanFG(args)
-# CanFG.load('premodels/seed85_anonymized_100_id_0_em_500_lp_10.pt')
-dict_path = 'premodels/test_irse50_seed85_anonymized_100_id_0_em_500_lp_10.pt'
-CanFG.load(path=dict_path)
-# CanFG.load_state_dict(model)
+# CanFG.load()
+# dict_path = 'premodels/test_irse50_seed85_anonymized_100_id_0_em_500_lp_10.pt'
+# CanFG.load(path=dict_path)
+CanFG.load_state_dict(torch.load('premodels/seed85_anonymized_100_id_0_em_500_lp_10.pt'))
 
 
 
