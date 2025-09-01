@@ -41,7 +41,7 @@ embed_map = {}
 import tqdm
 
 for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
-    for name in files:
+    for name in tqdm.tqdm(files):
         if name.endswith('jpg') or name.endswith('png'):
 
             try:
