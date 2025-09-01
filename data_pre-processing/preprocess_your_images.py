@@ -38,17 +38,11 @@ import tqdm
 
 # for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
 for name in tqdm.tqdm(os.listdir(img_root_dir)):
-        print(1)
         if name.endswith('jpg') or name.endswith('png'):
-
-            try:
                 p = os.path.join(img_root_dir, name)
-                print(2)
                 img = cv2.imread(p)
-                print(3)
                 # if img.shape[0]>256 and img.shape[1]
-                faces = detect_faces(img[:, :, ::-1].astype('float32'), min_face_size=64).resize((128, 128))
-                print(4)
+                faces = detect_faces(img[:, :, ::-1], min_face_size=64).resize((128, 128))
                 if len(faces) == 0:
                     print("skip")
                     continue
@@ -60,9 +54,7 @@ for name in tqdm.tqdm(os.listdir(img_root_dir)):
                     print(new_path)
                     face.save(os.path.join(save_path, new_path))
                 # embed_map[new_path] = embed.detach().cpu()
-            except Exception as e:
-                print(e)
-                continue 
+
 
 # with open(embed_path, 'wb') as f:
 #     pickle.dump(embed_map, f)
