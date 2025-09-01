@@ -47,7 +47,7 @@ for root, dirs, files in tqdm.tqdm(os.walk(img_root_dir)):
                 img = cv2.imread(p)
                 print(3)
                 # if img.shape[0]>256 and img.shape[1]
-                faces = detect_faces(img[:, :, ::-1].astype('float32'), min_face_size=64, crop_size=(128, 128))
+                faces = detect_faces(img[:, :, ::-1].astype('float32'), min_face_size=64).resize((128, 128))
                 print(4)
                 if len(faces) == 0:
                     print("skip")
