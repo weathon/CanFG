@@ -60,7 +60,10 @@ valid_dataloader = data.DataLoader(
 )
 
 CanFG = CanFG(args)
-CanFG.load('premodels/seed85_anonymized_100_id_0_em_500_lp_10.pt')
+# CanFG.load('premodels/seed85_anonymized_100_id_0_em_500_lp_10.pt')
+dict_path = 'premodels/irse50_seed85_anonymized_100_id_0_em_500_lp_10_EM.pt'
+state_dict = torch.load(dict_path, map_location="cpu")
+model.load_state_dict(state_dict)
 
 
 
@@ -70,7 +73,7 @@ if not os.path.exists('data/'+dataset+'/protected_A/'):
 if not os.path.exists('data/'+dataset+'/protected_AA/'):
     os.makedirs('data/'+dataset+'/protected_AA/')
 
-torch.save(CanFG.EM.state_dict(), 'premodels/irse50_seed85_anonymized_100_id_0_em_500_lp_10_EM.pt')
+# torch.save(CanFG.EM.state_dict(), 'premodels/irse50_seed85_anonymized_100_id_0_em_500_lp_10_EM.pt')
 CanFG.eval()
 with torch.no_grad():
     iter=0
