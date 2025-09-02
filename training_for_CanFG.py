@@ -76,7 +76,7 @@ print('Training images:', len(train_dataset), '/', 'Validating images:', len(val
 
 CanFG = CanFG(args)
 # todo 预训练模型
-CanFG.load('premodels/anonymized_rec100_id_10_em_0_lp_0.pt')
+CanFG.load('premodels/anonymized_100_id_10_em_0_lp_0.pt')
 
 
 progressbar = Progressbar()
